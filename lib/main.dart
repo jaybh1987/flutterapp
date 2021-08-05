@@ -19,29 +19,11 @@ class DogApp extends StatelessWidget {
           child: Column(
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
-             DecoratedBox(
-                 decoration: BoxDecoration(color: Colors.green),
-                 child: Padding(
-                     padding: const EdgeInsets.all(90.0),
-                     child: Text("Rokcy")
-                 )
-             ),
+             DogName("Jay"),
              SizedBox(height: 8.0),
-             DecoratedBox(
-                 decoration: BoxDecoration(color: Colors.green),
-                 child: Padding(
-                     padding: const EdgeInsets.all(90.0),
-                     child: Text("Jay")
-                 )
-             ),
+             DogName("Sandy"),
              SizedBox(height: 8.0),
-             DecoratedBox(
-                 decoration: BoxDecoration(color: Colors.green),
-                 child: Padding(
-                     padding: const EdgeInsets.all(90.0),
-                     child: Text("Amit")
-                 )
-             )
+             DogName("Meet"),
            ],
           )
         )
