@@ -1,5 +1,8 @@
 
 
+you can make Material App   or      you can use non-Material app
 
-basic layout:
-https://flutter.dev/docs/codelabs/layout-basics#row-and-column-classes
+Layout widgets vertically or horizontally :
+
+    Row & Column commanly used layout patterns.
+    takes list of child widgets
