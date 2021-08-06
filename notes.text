@@ -6,3 +6,24 @@ Layout widgets vertically or horizontally :
 
     Row & Column commanly used layout patterns.
     takes list of child widgets
+
+
+Statefull widget :
+    Provides mutable configuration info
+    Provided state object that can change over time and trigger rebuilds the UI.
+
+
+    ** How stateless widget execute.
+    Flutter ask    to   StatelessWidget   to create an element.
+    when it gets the element it is mounted to the screen.
+
+    So flutter ask root Widget for its child then child widget has some other child
+    so one by one all elements from particular widget are mounted to the screen .
+
+    ** How statefulll widget execute
+    Flutter ask    to StatefullWidget   to create an element it returns the statefull element.
+    Now statefull element go back to widget and ask to make a state object for me.
+
+        this is what we call createState method.
+
+

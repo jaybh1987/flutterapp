@@ -47,3 +47,34 @@ class DogName extends StatelessWidget {
     );
   }
 }
+
+
+
+
+// class ItemCount extends StatelessWidget {
+//   final String name;
+//   final int count;
+//
+//   ItemCount({this.name, this.count})
+//
+//   Widget build(BuildContext context) {
+//     return Text('$name : $count')
+//   }
+// }
+
+class ItemCounter extends StatefulWidget {
+  String name;
+
+  ItemCounter({this.name})
+
+  @override
+  _ItemCounterState createState() => _ItemCounterState();
+}
+
+class _ItemCounterState extends State<ItemCounter> {
+  int count = 0;
+
+  Widget build(BuildContext context) {
+    return Text('${widget.name}: $count');
+  }
+}
