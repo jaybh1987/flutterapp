@@ -15,6 +15,7 @@ class SecondRoute extends StatelessWidget  {
         child: ElevatedButton(
           onPressed: (){
             //Naviage to main.
+            Navigator.pop(context);
           },
           child: Text("Go Back"),
         ),

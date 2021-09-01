@@ -37,6 +37,25 @@ class MyCustomForm extends StatefulWidget {
 class MyCustomFormState extends State<MyCustomForm> {
 
   final _formKey = GlobalKey<FormState>();
+  final _nmCtrl = TextEditingController();
+  final _phCtrl = TextEditingController();
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+      _nmCtrl.dispose();
+      _phCtrl.dispose();
+      myFocusNode.dispose();
+      super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +65,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
+            controller: _nmCtrl,
             decoration: InputDecoration(
               icon: Icon(Icons.person),
               hintText: 'Enter Your Name',
@@ -53,6 +73,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
           TextFormField(
+            controller: _phCtrl,
             decoration: InputDecoration(
                 icon: Icon(Icons.phone),
                 hintText: 'Enter a phone number',
@@ -63,10 +84,18 @@ class MyCustomFormState extends State<MyCustomForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => secRoute.SecondRoute())
-                );
+
+
+                showDialog(context: context, builder: (context) => AlertDialog(
+                  content: Text(_nmCtrl.text + " " + _phCtrl.text)
+                ));
+
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => secRoute.SecondRoute())
+                // );
+
+
                 // if(_formKey.currentState!.validate()) {
                 //   ScaffoldMessenger.of(context).showSnackBar(
                 //     const SnackBar(content: Text("Processing Data."))
