@@ -1,48 +1,59 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
-  runApp( new DogApp());
+  runApp(MyApp());
 }
 
-class DogApp extends StatelessWidget {
-  Widget build(BuildContext context) {
 
-    return MaterialApp(
-      title: 'My Dog App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('yellow lab'),
-        ),
-        body: Center(
+class MyApp extends StatefulWidget {
 
-          child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-             DogName("Jay"),
-             SizedBox(height: 8.0),
-             DogName("Sandy"),
-             SizedBox(height: 8.0),
-             DogName("Meet"),
-           ],
-          )
-        )
-      )
-    );
+  State<StatefulWidget> createState() {
+    return _MyAppState();
   }
 }
 
 
-class DogName extends StatelessWidget {
-  final String name;
-  const DogName(this.name);
+class _MyAppState extends State<MyApp> {
+
+  List<String> _products = ['Laptop'];
+
 
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(color: Colors.lightBlueAccent),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(name),
+    return MaterialApp(
+      home: Scaffold(
+
+        appBar: AppBar(
+          title: Text('First App'),
+        ),
+
+        body: Column(
+          children: [
+            Container(
+
+              margin: EdgeInsets.all(10.0),
+
+
+              child: RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    _products.add('PC');
+                  });
+                },
+                child: Text('Hello World'))),
+
+            Column(
+              children: _products.map( (e) =>
+                  Card(
+                    child: Column(
+                      children: <Widget>[ Text(e) ],
+                    ),
+                  )
+              ).toList(),
+            )
+          ],
+        ),
       ),
     );
   }
