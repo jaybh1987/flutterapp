@@ -57,6 +57,8 @@ class MyCustomFormState extends State<MyCustomForm> {
   }
 
 
+
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -104,7 +106,8 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
               child: Text('Submit'),
             ),
-          )
+          ),
+          Text("Testing with text.")
         ],
       ),
     );
