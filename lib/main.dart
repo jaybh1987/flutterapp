@@ -1,49 +1,79 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp( new DogApp());
-}
+void main() => runApp(MyApp());
 
-class DogApp extends StatelessWidget {
+
+class MyApp extends StatelessWidget {
+    const MyApp({Key? key}): super(key: key);
+
+  @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      title: 'My Dog App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('yellow lab'),
-        ),
-        body: Center(
+      const appTitle = 'Form Validation Demo';
 
-          child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-             DogName("Jay"),
-             SizedBox(height: 8.0),
-             DogName("Sandy"),
-             SizedBox(height: 8.0),
-             DogName("Meet"),
-           ],
-          )
-        )
-      )
-    );
+      return MaterialApp(
+        title: appTitle,
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text(appTitle),
+          ),
+          body: MyCustomForm(),
+        ),
+      );
   }
 }
 
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({Key? key}): super(key: key);
 
-class DogName extends StatelessWidget {
-  final String name;
-  const DogName(this.name);
+  @override
+  State<StatefulWidget> createState() {
+    return MyCustomFormState();
+  }
+}
 
+class MyCustomFormState extends State<MyCustomForm> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(color: Colors.lightBlueAccent),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(name),
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            validator: (value) {
+              if(value == null || value.isEmpty) {
+                return 'Please enter some text. ';
+              }
+              return null;
+            }),
+          TextFormField(
+              validator: (value) {
+                if(value == null || value.isEmpty) {
+                  return 'Please enter some text. ';
+                }
+                return null;
+              }),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if(_formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Processing Data."))
+                  );
+                }
+              },
+              child: Text('Submit'),
+            ),
+          )
+        ],
       ),
     );
   }
 }
+
