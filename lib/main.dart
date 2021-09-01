@@ -1,48 +1,76 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp( new DogApp());
+
+
+void main() => runApp(LifeCycleExm());
+
+class LifeCycleExm extends StatefulWidget {
+  _LifeCycleExmState createState() => _LifeCycleExmState();
 }
 
-class DogApp extends StatelessWidget {
-  Widget build(BuildContext context) {
 
-    return MaterialApp(
-      title: 'My Dog App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('yellow lab'),
-        ),
-        body: Center(
+class _LifeCycleExmState extends State<LifeCycleExm> with WidgetsBindingObserver {
 
-          child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-             DogName("Jay"),
-             SizedBox(height: 8.0),
-             DogName("Sandy"),
-             SizedBox(height: 8.0),
-             DogName("Meet"),
-           ],
-          )
-        )
-      )
-    );
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    print("initState");
   }
-}
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    print('AppLifeCycleState: $state');
+  }
 
-class DogName extends StatelessWidget {
-  final String name;
-  const DogName(this.name);
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
 
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    print("deactivate");
+    super.deactivate();
+  }
+
+  int _counter = 0 ;
+
+  void _plusCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(color: Colors.lightBlueAccent),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(name),
+    print("build");
+    return Scaffold(
+      appBar: AppBar( title: Text("Widget Life Cycle"),) ,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("You have pushed the button this many times"),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4 ,
+            ),
+            SizedBox(height: 8.8,)
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _plusCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
       ),
     );
   }
