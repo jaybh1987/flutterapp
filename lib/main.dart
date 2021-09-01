@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'secondRoute.dart' as secRoute;
 
 void main() => runApp(MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-      const appTitle = 'Form Validation Demo';
+      const appTitle = 'Form Application';
 
       return MaterialApp(
         title: appTitle,
@@ -45,28 +46,32 @@ class MyCustomFormState extends State<MyCustomForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
-            validator: (value) {
-              if(value == null || value.isEmpty) {
-                return 'Please enter some text. ';
-              }
-              return null;
-            }),
+            decoration: InputDecoration(
+              icon: Icon(Icons.person),
+              hintText: 'Enter Your Name',
+              labelText: 'Name'
+            ),
+          ),
           TextFormField(
-              validator: (value) {
-                if(value == null || value.isEmpty) {
-                  return 'Please enter some text. ';
-                }
-                return null;
-              }),
+            decoration: InputDecoration(
+                icon: Icon(Icons.phone),
+                hintText: 'Enter a phone number',
+                labelText: 'Phone'
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                if(_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Processing Data."))
-                  );
-                }
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => secRoute.SecondRoute())
+                );
+                // if(_formKey.currentState!.validate()) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(content: Text("Processing Data."))
+                //   );
+                // }
               },
               child: Text('Submit'),
             ),
