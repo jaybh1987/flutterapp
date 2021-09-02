@@ -1,6 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'secondRoute.dart' as secRoute;
+
+import 'testHttp.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,12 +40,13 @@ class MyCustomFormState extends State<MyCustomForm> {
   final _nmCtrl = TextEditingController();
   final _phCtrl = TextEditingController();
   late FocusNode myFocusNode;
-
+  late Future<Album> futureAlbum;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     myFocusNode = FocusNode();
+    futureAlbum = TestHttp().fetchAlbum();
   }
 
   @override
@@ -55,10 +56,6 @@ class MyCustomFormState extends State<MyCustomForm> {
       myFocusNode.dispose();
       super.dispose();
   }
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -113,4 +110,41 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
