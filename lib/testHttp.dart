@@ -24,7 +24,6 @@ class Album {
 
 class TestHttp {
 
-
   Future<Album> fetchAlbum() async {
     final res = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
@@ -35,7 +34,7 @@ class TestHttp {
       throw Exception("Fail to load album.");
     }
   }
-  
+
 }
 
 

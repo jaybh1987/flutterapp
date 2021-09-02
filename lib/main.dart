@@ -84,10 +84,26 @@ class MyCustomFormState extends State<MyCustomForm> {
             child: ElevatedButton(
               onPressed: () {
 
+                print('button pressed.');
 
-                showDialog(context: context, builder: (context) => AlertDialog(
-                  content: Text(_nmCtrl.text + " " + _phCtrl.text)
-                ));
+                FutureBuilder<Album>(
+                  future: futureAlbum,
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData) {
+                      print(snapshot.data!.title);
+                      return Text(snapshot.data!.title);
+                    } else if (snapshot.hasError) {
+                      print('some error occurs.');
+                      return Text('${snapshot.error}');
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
+
+
+                // showDialog(context: context, builder: (context) => AlertDialog(
+                //   content: Text(_nmCtrl.text + " " + _phCtrl.text)
+                // ));
 
                 // Navigator.push(
                 //     context,
